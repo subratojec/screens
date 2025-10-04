@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>subraot</title>
+    <title>API Documentation</title>
 </head>
 <body>
-    <p>Hello this subrato singh</p>
+    <h1>Email Verification & Registration API</h1>
+    <p>This is a backend API. Use the following endpoints:</p>
+    
+    <h2>Available Endpoints:</h2>
+    <ul>
+        <li><strong>POST /verify-email</strong> - Send OTP to email address</li>
+        <li><strong>POST /verify-email-otp</strong> - Verify OTP code</li>
+        <li><strong>POST /register</strong> - Complete user registration</li>
+    </ul>
+    
+    <h2>API Documentation:</h2>
+    <ul>
+        <li><a href="/api-docs">/api-docs</a> - JSON API documentation</li>
+        <li><a href="/docs">/docs</a> - Interactive Swagger UI documentation</li>
+    </ul>
+    
+    <h2>Usage Flow:</h2>
+    <ol>
+        <li>Send POST request to <code>/verify-email</code> with email address</li>
+        <li>Check email for OTP code</li>
+        <li>Send POST request to <code>/verify-email-otp</code> with email and OTP</li>
+        <li>Send POST request to <code>/register</code> with complete user data</li>
+    </ol>
 </body>
 </html>
