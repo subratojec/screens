@@ -1,7 +1,8 @@
+from typing import Annotated
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel, EmailStr, HttpUrl
+from pydantic import BaseModel, EmailStr, HttpUrl, Field 
 from starlette.responses import JSONResponse
 
 from database import create_tables, save_user, drop_tables, Base, engine
@@ -9,8 +10,6 @@ from mail_verify import (
     EmailSchema, OTPVerifySchema, generate_otp, send_otp_email, 
     store_otp, verify_otp, is_email_verified, remove_verified_email
 )
-
-
 
 
 app = FastAPI()
@@ -31,13 +30,13 @@ def on_shutdown():
 
 # Pydantic models
 class User(BaseModel):
-    username: str
-    password: str
-    confirm_password: str
-    email: EmailStr
-    phonenumber: str
-    website: HttpUrl
-    adharid: int
+    username: Annotated[str,Field(...,min_length=3,max_length=50)]
+    password: Annotated[str,Field(...,min_length=8,max_length=50)]
+    confirm_password: Annotated[str,Field(...,min_length=8,max_length=50)]
+    email: Annotated[EmailStr,Field(...,min_length=3,max_length=50)]
+    phonenumber: Annotated[str,Field(...,min_length=10,max_length=10)]
+    website: Annotated[HttpUrl,Field(min_length=3,max_length=50)]
+    adharid: Annotated[int,Field(...,min_length=12,max_length=12)]
 
 
 
@@ -156,6 +155,9 @@ async def register(user: User):
     remove_verified_email(user.email)
     
     return {"message": f"User {db_user.username} registered successfully."}
+
+
+
 
 
 # Remove before the final deployment
