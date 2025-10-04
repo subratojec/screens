@@ -1,4 +1,4 @@
-# 📧 Email Verification API
+
 
 ## 🚀 Quick Setup Guide
 
